@@ -15,11 +15,11 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "cy:main-page": "cypress run --spec 'cypress/e2e/main-page.cy.js' --record --key $CYPRESS_RECORD_KEY",
-    "cy:admin-login": "cypress run --spec 'cypress/e2e/admin-login.cy.js' --record --key $CYPRESS_RECORD_KEY",
-    "cy:booking": "cypress run --spec 'cypress/e2e/booking.cy.js' --record --key $CYPRESS_RECORD_KEY",
+    "cy:main-page": "dotenv -- cypress run --group main-page --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/main-page.cy.js' --record",
+    "cy:admin-login": "dotenv -- cypress run --group admin-login --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/admin-login.cy.js' --record",
+    "cy:booking": "dotenv -- cypress run --group booking --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/booking.cy.js' --record",
     "cy:all": "npm run cy:main-page & npm run cy:admin-login & npm run cy:booking",
-    "cy:parallel": "dotenv -- npm run cy:all"
+    "cy:parallel": "export CYPRESS_CI_BUILD_ID=local-$RANDOM && npm run cy:all"
   },
   "devDependencies": {
     "cypress": "^16.2.0",
