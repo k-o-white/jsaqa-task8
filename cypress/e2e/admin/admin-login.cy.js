@@ -1,5 +1,5 @@
-import selectors from "../fixtures/selectors.json";
-import loginData from "../fixtures/login-data.json";
+import selectors from "../../fixtures/selectors.json";
+import loginData from "../../fixtures/login-data.json";
 
 describe("Autorization to admin panel", () => {
   beforeEach(() => {

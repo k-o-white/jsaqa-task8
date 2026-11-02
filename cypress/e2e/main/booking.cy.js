@@ -1,5 +1,5 @@
-import selectors from "../fixtures/selectors.json";
-import loginData from "../fixtures/login-data.json";
+import selectors from "../../fixtures/selectors.json";
+import loginData from "../../fixtures/login-data.json";
 
 describe("Booking tickets", () => {
   it("Successfully books first three seats in third row", () => {
@@ -25,7 +25,7 @@ describe("Booking tickets", () => {
         .contains(selectors.mainPage.time)
         .click();
     });
-    const seats = require("../fixtures/seats.json");
+    const seats = require("../../fixtures/seats.json");
     seats.forEach((seat) => {
       cy.get(
         `.buying-scheme__wrapper > :nth-child(${seat.row}) > :nth-child(${seat.seat})`

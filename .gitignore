@@ -29,3 +29,5 @@ cypress.env.json
 *.swp
 .DS_Store
 Thumbs.db
+
+jenkins.war

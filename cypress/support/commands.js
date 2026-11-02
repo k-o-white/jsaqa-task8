@@ -38,3 +38,10 @@ Cypress.Commands.add("login", (login, password, loginSelector, passwordSelector,
   }
   cy.get(submitSelector).click();
 });
+
+Cypress.Commands.add("shouldHaveValueMissing", (selector) => {
+    cy.get(selector)
+        .should("have.prop", "validity")
+        .its("valueMissing")
+        .should("be.true");
+});

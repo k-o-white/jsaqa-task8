@@ -15,11 +15,23 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "cy:main-page": "dotenv -- cypress run --group main-page --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/main-page.cy.js' --record",
-    "cy:admin-login": "dotenv -- cypress run --group admin-login --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/admin-login.cy.js' --record",
-    "cy:booking": "dotenv -- cypress run --group booking --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/booking.cy.js' --record",
-    "cy:all": "npm run cy:main-page & npm run cy:admin-login & npm run cy:booking",
-    "cy:parallel": "export CYPRESS_CI_BUILD_ID=local-$RANDOM && npm run cy:all"
+    "cy:main-page": "dotenv -- cypress run --group main-page --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/main/main-page.cy.js' --record",
+    "cy:admin-login": "dotenv -- cypress run --group admin-login --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/admin/admin-login.cy.js' --record",
+    "cy:admin-login-sad-path": "dotenv -- cypress run --group admin-login-sad-path --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/admin/admin-login-sad-path.cy.js' --record",
+    "cy:booking": "dotenv -- cypress run --group booking --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/main/booking.cy.js' --record",
+    "cy:all": "npm run cy:main-page & npm run cy:admin-login & npm run cy:booking & npm run cy:admin-login-sad-path",
+    "cy:parallel": "CYPRESS_CI_BUILD_ID=local-$RANDOM npm run cy:all",
+    "cy:browser": "dotenv -- cypress run --browser $BROWSER --group $BROWSER --ci-build-id $CYPRESS_CI_BUILD_ID --record",
+    "cy:chrome": "BROWSER=chrome CYPRESS_CI_BUILD_ID=local-$RANDOM npm run cy:browser",
+    "cy:electron": "BROWSER=electron CYPRESS_CI_BUILD_ID=local-$RANDOM npm run cy:browser",
+    "cy:edge": "BROWSER=edge CYPRESS_CI_BUILD_ID=local-$RANDOM npm run cy:browser",
+    "cy:parallel-browsers": "export CYPRESS_CI_BUILD_ID=local-$RANDOM && (BROWSER=$BROWSER1 npm run cy:browser & BROWSER=$BROWSER2 npm run cy:browser & wait)",
+    "cy:pb-chrome-edge": "BROWSER1=chrome BROWSER2=edge npm run cy:parallel-browsers",
+    "cy:pb-chrome-electron": "BROWSER1=chrome BROWSER2=electron npm run cy:parallel-browsers",
+    "cy:pb-edge-electron": "BROWSER1=edge BROWSER2=electron npm run cy:parallel-browsers",
+    "cy:main": "dotenv -- cypress run --group main --browser chrome --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/main/*.cy.js' --record",
+    "cy:admin": "dotenv -- cypress run --group admin --browser chrome --ci-build-id $CYPRESS_CI_BUILD_ID --spec 'cypress/e2e/admin/*.cy.js' --record",
+    "cy:folders-parallel": "export CYPRESS_CI_BUILD_ID=local-$RANDOM && (npm run cy:main & npm run cy:admin & wait)"
   },
   "devDependencies": {
     "cypress": "^16.2.0",
